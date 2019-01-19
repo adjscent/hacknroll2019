@@ -81,9 +81,7 @@ class ProfilePage extends React.Component {
                 </GridItem>
               </GridContainer>
               <div className={classes.description}>
-                <p>
-                  Hi. You are a user.
-                </p>
+              <Link to='EditorPagePure'>display text</Link>
               </div>
               <br />
             </div>
