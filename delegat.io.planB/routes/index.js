@@ -11,16 +11,13 @@ router.get('/js/call.js', function (req, res, next) {
     root: "views"
   });
 });
-router.get('/js/fireedit.js', function (req, res, next) {
-  res.sendFile('fireedit.js', {
-    root: "views"
-  });
-});
+
 router.get('/js/index2.html', function (req, res, next) {
   res.sendFile('index2.html', {
     root: "views"
   });
 });
+
 router.get('/css/style.css', function (req, res, next) {
   res.sendFile('style.css', {
     root: "views"
