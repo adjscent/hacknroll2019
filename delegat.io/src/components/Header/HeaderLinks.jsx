@@ -47,7 +47,12 @@ function HeaderLinks({
             </ListItem>
           <ListItem className={classes.listItem}>
             <Button href="/profile-page" color="transparent" className={classes.navLink}>
-              Profile Page
+              {props.authUser.email}
+            </Button>
+          </ListItem>
+          <ListItem className={classes.listItem}>
+            <Button href="/editor-page" color="transparent" className={classes.navLink}>
+              Editor
             </Button>
           </ListItem>
           <ListItem className={classes.listItem}>
