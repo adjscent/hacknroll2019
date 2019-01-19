@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+build
+
+# Other useless things
+.DS_STORE
+
+src/assets/scss/material-kit-react.css
+
