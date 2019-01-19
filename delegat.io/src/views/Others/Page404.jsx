@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 
 // Sections for this page
 import HeaderBar from "components/Header/HeaderBar.jsx";
-import image from "assets/img/bg7.jpg";
+import image from "assets/img/bg.jpg";
 
 import AuthUserContext from '../../components/Auth/AuthUserContext';
 import withAuthorization from '../../components/Auth/withAuthorization';
@@ -28,7 +28,7 @@ import withAuthentication from '../../components/Auth/withAuthentication';
 
 const dashboardRoutes = [];
 
-class LandingPage extends React.Component {
+class Page404 extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -38,20 +38,7 @@ class LandingPage extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-                <h1 className={classes.title}>Test header.</h1>
-                <h4>
-                  Welcome to Delegat.io
-                </h4>
-
-
-                <Button
-                  component={Link}
-                  to="/login-page"
-                  color="primary"
-                  size="lg"
-                >
-                  Sign In
-                </Button>
+                <h1 className={classes.title}>    Page not Found</h1>
                 
               </GridItem>
             </GridContainer>
@@ -63,4 +50,4 @@ class LandingPage extends React.Component {
   }
 }
 
-export default withAuthentication(withStyles(landingPageStyle)(LandingPage));
+export default withAuthentication(withStyles(landingPageStyle)(Page404));

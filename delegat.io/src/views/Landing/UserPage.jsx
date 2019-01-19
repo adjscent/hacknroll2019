@@ -1,33 +1,42 @@
 import React from "react";
-
+// nodejs library that concatenates classes
+import classNames from "classnames";
 // material-ui components
 import withStyles from "material-ui/styles/withStyles";
 
 // @material-ui/icons
 
 // core components
+import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import Calendar from "components/Calendar/Calendar.jsx";
 
-import mainPageStyle from "assets/jss/material-kit-react/views/mainPage.jsx";
+import landingPageStyle from "assets/jss/material-kit-react/views/landingPage.jsx";
+import { Link } from "react-router-dom";
 
 // Sections for this page
 import HeaderBar from "components/Header/HeaderBar.jsx";
 import image from "assets/img/bg.jpg";
+
+import AuthUserContext from "../../components/Auth/AuthUserContext";
+import withAuthorization from "../../components/Auth/withAuthorization";
 import withAuthentication from "../../components/Auth/withAuthentication";
-import { Paper } from "material-ui";
+
 import { auth, firebase } from "../../firebase/index.jsx";
+
+const dashboardRoutes = [];
+
+// Import Admin SDK
 
 // Get a database reference to our posts
 var db = firebase.database;
 var ref = db.ref("/server/");
 
-class MainPage extends React.Component {
+class UserPage extends React.Component {
   constructor(props) {
     super(props);
     // we use this to make the card to appear after the page has been rendered
@@ -73,51 +82,31 @@ class MainPage extends React.Component {
 
   render() {
     const { classes, ...rest } = this.props;
+
     return (
       <div>
         <HeaderBar authUser={this.props.authUser} {...rest} />
         <Parallax image={image}>
-          <div id="main">
-            <div className={classes.left}>
-              <div className={classes.root}>
-                <GridContainer spacing={24}>
-                  <GridItem xs={12}>
-                    <Paper className={classes.paper}>Recent Documents</Paper>
-                  </GridItem>
-                  <GridItem xs={2}>
-                    <Paper className={classes.paper}>Document</Paper>
-                  </GridItem>
-                  <GridItem xs={4} />
-                  <GridItem xs={4} />
-                  <GridItem xs={2}>
-                    <Paper className={classes.paper}>Date Last Modified</Paper>
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <Paper className={classes.paper}>Recent Calls</Paper>
-                  </GridItem>
-                  <GridItem xs={2}>
-                    <Paper className={classes.paper}>Call With</Paper>
-                  </GridItem>
-                  <GridItem xs={5} />
-                  <GridItem xs={3}>
-                    <Paper className={classes.paper}>Document Worked On</Paper>
-                  </GridItem>
-                  <GridItem xs={2}>
-                    <Paper className={classes.paper}>Date/Time Of Call</Paper>
-                  </GridItem>
-
-                </GridContainer>
-              </div>
-
-              <Button simple="simple" color="primary" size="xs" type="submit">
-                +
-              </Button>
-            </div>
-
-            <div className={classes.right}>
-              <h1 className={classes.title}>Your Calendar </h1>
-              <Calendar />
-            </div>
+          <div className={classes.container}>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={6}>
+                <h1 className={classes.title}>Test header.</h1>
+                <h4>Welcome to Delegat.io</h4>
+                <div>
+                  Current Rooms{" "}
+                  {this.state.server.map(function(d, idx) {
+                    return (
+                      <li key={idx}>
+                        <a href={'http://localhost:3500/?id=' + d.id}>{d.id}</a>
+                      </li>
+                    );
+                  })}
+                </div>
+                <Button onClick={this.createRoom} type="button">
+                  Create Room
+                </Button>
+              </GridItem>
+            </GridContainer>
           </div>
         </Parallax>
         <Footer />
@@ -126,4 +115,4 @@ class MainPage extends React.Component {
   }
 }
 
-export default withAuthentication(withStyles(mainPageStyle)(MainPage));
+export default withAuthentication(withStyles(landingPageStyle)(UserPage));

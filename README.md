@@ -10,7 +10,16 @@ npm install
 npm start
 ```
 
-Deployment Page
+```bash
+cd delegat.io.partB
+npm install
+set Debug=hacknroll:*
+set PORT=3500
+npm start
+```
+
+
+Deployment Page (not working)
 ```
 https://delegatio.herokuapp.com/
 ```

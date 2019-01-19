@@ -27,7 +27,7 @@ function HeaderLinks({
   const {classes} = props;
   return (<List className={classes.list}>
     <ListItem className={classes.listItem}>
-      <Button href="/compare" color="transparent" className={classes.navLink}>
+      <Button href="/Home" color="transparent" className={classes.navLink}>
         Main Page
       </Button>
     </ListItem>
@@ -48,11 +48,6 @@ function HeaderLinks({
           <ListItem className={classes.listItem}>
             <Button href="/profile-page" color="transparent" className={classes.navLink}>
               Profile Page
-            </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button href="/admin" color="transparent" className={classes.navLink}>
-              Admin
             </Button>
           </ListItem>
         </div>)
