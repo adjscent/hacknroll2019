@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="js/call.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" charset="utf-8">
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
@@ -27,6 +28,87 @@
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
     <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
 
+    <script>
+            var firepad;
+            
+            function start() {
+              //// Initialize Firebase.
+              //// TODO: replace with your Firebase project configuration.
+              var config = {
+                  apiKey: "AIzaSyDIY4dr9w-zKYHzJ2S8NGIDYK0JXKcTkFc",
+                  authDomain: "delegat-io.firebaseapp.com",
+                  databaseURL: "https://delegat-io.firebaseio.com",
+              };
+              firebase.initializeApp(config);
+              //// Get Firebase Database reference.
+              var firepadRef = getExampleRef();
+              //// Create CodeMirror (with line numbers and the JavaScript mode).
+              var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+                lineNumbers: true,
+              });
+              //// Create Firepad.
+              firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+                defaultText: 'Let us begin collaborating here!',
+                richTextToolbar: true,
+                richTextShortcuts: true,
+              });
+            }
+
+            function getUrlVars() {
+                var vars = {};
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                    function (m, key, value) {
+                        vars[key] = value;
+                    });
+                return vars;
+            }
+
+            // Helper to get hash from end of URL or generate a random one.
+            function getExampleRef() {
+              var ref = firebase.database().ref();
+              var hash = getUrlVars()["id"];
+              if (hash) {
+                ref = ref.child(hash);
+              } else {
+                ref = ref.push(); // generate unique location.
+                window.location = window.location + ref.key; // add it as a hash to the URL.
+              }
+              if (typeof console !== 'undefined') {
+                console.log('Firebase data: ', ref.toString());
+              }
+              return ref;
+            }
+
+            function downloadText() {
+              var textToWrite = firepad.getText().replace(/\n/g, "\r\n");
+              var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+              alert("Your download will begin now.");
+              var fileNameToSaveAs = "downloadFile";
+
+              var downloadLink = document.createElement("a");
+              downloadLink.download = fileNameToSaveAs;
+              downloadLink.innerHTML = "Download File";
+              if (window.webkitURL != null)
+              {
+                  // Chrome allows the link to be clicked
+                  // without actually adding it to the DOM.
+                  downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+              }
+              else
+              {
+                  // Firefox requires the link to be added to the DOM
+                  // before it can be clicked.
+                  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                  downloadLink.onclick = destroyClickedElement;
+                  downloadLink.style.display = "none";
+                  document.body.appendChild(downloadLink);
+              }
+
+              downloadLink.click();
+            }
+
+          </script>
+
 
 </head>
 
@@ -36,49 +118,31 @@
             <div class="split left firepad-container" id="firepad-container">
             </div>
             <div class="split right">
+                <div class="container">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                                <a class="navbar-brand" href="#">Delegat.io</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                  <span class="navbar-toggler-icon"></span>
+                                </button>
+                              
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                  <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <button type="button" class="btn btn-primary" onclick="downloadText()">Download Text</button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </nav>
+                              <br>
+                        </div>
                 <call></call>
             </div>
         </div>
     </div>
-    <script>
-      function start() {
-        //// Initialize Firebase.
-        //// TODO: replace with your Firebase project configuration.
-        var config = {
-            apiKey: "AIzaSyDIY4dr9w-zKYHzJ2S8NGIDYK0JXKcTkFc",
-            authDomain: "delegat-io.firebaseapp.com",
-            databaseURL: "https://delegat-io.firebaseio.com",
-        };
-        firebase.initializeApp(config);
-        //// Get Firebase Database reference.
-        var firepadRef = getExampleRef();
-        //// Create CodeMirror (with line numbers and the JavaScript mode).
-        var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-          lineNumbers: true,
-        });
-        //// Create Firepad.
-        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-          defaultText: 'Let us begin collaborating here!',
-          richTextToolbar: true,
-          richTextShortcuts: true,
-        });
-      }
-      // Helper to get hash from end of URL or generate a random one.
-      function getExampleRef() {
-        var ref = firebase.database().ref();
-        var hash = window.location.hash.replace(/#/g, '');
-        if (hash) {
-          ref = ref.child(hash);
-        } else {
-          ref = ref.push(); // generate unique location.
-          window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
-        }
-        if (typeof console !== 'undefined') {
-          console.log('Firebase data: ', ref.toString());
-        }
-        return ref;
-      }
-    </script>
+ 
   </body>
 
 </html>

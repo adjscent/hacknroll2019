@@ -23,6 +23,13 @@ router.get('/css/style.css', function (req, res, next) {
     root: "views"
   });
 });
+
+router.get('/css/bootstrap.css', function (req, res, next) {
+  res.sendFile('bootstrap.css', {
+    root: "views"
+  });
+});
+
 router.get('/', function (req, res, next) {
   res.sendFile('index.html', {
     root: "views"
