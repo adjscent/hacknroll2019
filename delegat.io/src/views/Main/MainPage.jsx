@@ -18,7 +18,7 @@ import mainPageStyle from "assets/jss/material-kit-react/views/mainPage.jsx";
 
 // Sections for this page
 import HeaderBar from "components/Header/HeaderBar.jsx";
-import image from "assets/img/bg.jpg";
+import image from "assets/img/bg7.jpg";
 import withAuthentication from "../../components/Auth/withAuthentication";
 import { Paper } from "material-ui";
 import { auth, firebase } from "../../firebase/index.jsx";
@@ -82,7 +82,9 @@ class MainPage extends React.Component {
               <div className={classes.root}>
                 <GridContainer spacing={24}>
                   <GridItem xs={12}>
-                    <Paper className={classes.paper}>Recent Documents</Paper>
+                    <Paper className={classes.paper}>
+                    Recent Documents
+                    </Paper>
                   </GridItem>
                   <GridItem xs={2}>
                     <Paper className={classes.paper}>Document</Paper>
@@ -109,7 +111,7 @@ class MainPage extends React.Component {
                 </GridContainer>
               </div>
 
-              <Button simple="simple" color="primary" size="xs" type="submit">
+              <Button color="primary" size="xs">
                 +
               </Button>
             </div>
