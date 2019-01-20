@@ -69,8 +69,12 @@
               return ref;
             }
 
-            function myFunction() {
-              alert(firepad.getText());
+            function downloadText() {
+              alert("Your download will begin now.");
+              var content = firepad.getText();
+              var uriContent = "data:application/octet-stream," + encodeURIComponent(content);
+              var newWindow = window.open(uriContent, 'neuesDokument')
+
             }
           </script>
 
@@ -96,7 +100,7 @@
                                       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                      <button type="button" class="btn btn-primary" onclick="myFunction()">Get Text</button>
+                                      <button type="button" class="btn btn-primary" onclick="downloadText()">Download Text</button>
                                     </li>
                                   </ul>
                                 </div>
