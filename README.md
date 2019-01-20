@@ -1,6 +1,6 @@
 # hacknroll2019
 
-delegat.io
+Delegat.io
 
 ## How to start
 
