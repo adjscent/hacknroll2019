@@ -1,0 +1,13 @@
+{
+  "name": "delegat.io.standalone",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node server"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "http": "0.0.0",
+    "socket.io": "^2.2.0"
+  }
+}

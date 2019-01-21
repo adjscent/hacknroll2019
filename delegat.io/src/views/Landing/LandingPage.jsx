@@ -38,9 +38,9 @@ class LandingPage extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
-                <h1 className={classes.title}>Test header.</h1>
+                <h1 className={classes.title}>Welcome to Delegat.io</h1>
                 <h4>
-                  Welcome to Delegat.io
+                  Your one stop prof-student consultation page.
                 </h4>
 
 
