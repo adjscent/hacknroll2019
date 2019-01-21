@@ -18,8 +18,7 @@ set PORT=3500
 npm start
 ```
 
-
-Deployment Page (not working)
+Deployment Page (Standalone)
 ```
-https://delegatio.herokuapp.com/
+https://ec2-54-251-181-188.ap-southeast-1.compute.amazonaws.com/
 ```
