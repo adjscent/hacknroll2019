@@ -18,7 +18,7 @@ set PORT=3500
 npm start
 ```
 
-Deployment Page (Standalone)
+Deployment Page (Standalone) - This has been taken down.
 ```
 https://ec2-54-251-181-188.ap-southeast-1.compute.amazonaws.com/
 ```
